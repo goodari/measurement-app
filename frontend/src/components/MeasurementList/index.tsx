@@ -72,6 +72,7 @@ const MeasurementList: FunctionComponent<PropType> = ({ measurements }) => {
             <th
               className="w-1/2 cursor-pointer"
               onClick={() => changeOrder(col)}
+              key={col.label}
             >
               {col.label}
               {renderSortIcon(col)}
@@ -81,7 +82,7 @@ const MeasurementList: FunctionComponent<PropType> = ({ measurements }) => {
       </thead>
       <tbody>
         {sortedMeasurements.map((measurement) => (
-          <tr>
+          <tr key={measurement.date}>
             <td>{measurement.date}</td>
             <td>{measurement.value} kg</td>
             {/*  // TODO: Get unit from data */}

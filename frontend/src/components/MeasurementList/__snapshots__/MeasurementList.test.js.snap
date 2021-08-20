@@ -1,0 +1,54 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<table
+  className="w-full mx-10 text-center"
+>
+  <thead>
+    <tr>
+      <th
+        className="w-1/2 cursor-pointer"
+        onClick={[Function]}
+      >
+        Date
+         ↓
+      </th>
+      <th
+        className="w-1/2 cursor-pointer"
+        onClick={[Function]}
+      >
+        Value
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        2021-08-20T07:08:59.028Z
+      </td>
+      <td>
+        2000
+         kg
+      </td>
+    </tr>
+    <tr>
+      <td>
+        2021-07-22T17:08:59.028Z
+      </td>
+      <td>
+        2345
+         kg
+      </td>
+    </tr>
+    <tr>
+      <td>
+        2021-06-01T11:08:59.028Z
+      </td>
+      <td>
+        321
+         kg
+      </td>
+    </tr>
+  </tbody>
+</table>
+`;
