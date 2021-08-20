@@ -3,9 +3,10 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link,
   Redirect,
+  NavLink,
 } from "react-router-dom";
+
 import { routes } from "./routes";
 
 export default function Routes() {
@@ -13,10 +14,16 @@ export default function Routes() {
     <Router>
       <div>
         <nav>
-          <ul>
+          <ul className="flex gap-6 justify-center mx-auto my-2">
             {routes.map((route) => (
               <li className="text-lg">
-                <Link to={route.path}>{route.label}</Link>
+                <NavLink
+                  to={route.path}
+                  className="text-blue-500 hover:text-blue-800"
+                  activeClassName="font-bold"
+                >
+                  {route.label}
+                </NavLink>
               </li>
             ))}
           </ul>
