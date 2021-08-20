@@ -1,3 +1,7 @@
+# Tamtron Weighing App Frontend
+
+This is the front end part or Tamtron Weighing App.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
