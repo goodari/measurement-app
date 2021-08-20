@@ -15,4 +15,4 @@ export const sortByDate = (order: Order = Order.ASC) => (
 export const sortByValue = (order: Order = Order.ASC) => (
   a: Measurement,
   b: Measurement
-) => (order === Order.ASC ? -1 : 1) * (a.value > b.value ? 1 : -1);
+) => (order === Order.ASC ? -1 : 1) * (a.value < b.value ? 1 : -1);
