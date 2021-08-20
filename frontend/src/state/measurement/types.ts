@@ -6,4 +6,10 @@ export interface Measurement {
 export interface MeasurementState {
   measurements: Measurement[];
   loading: boolean;
+  error?: UIError;
+}
+
+export interface UIError {
+  id: string;
+  label: string;
 }

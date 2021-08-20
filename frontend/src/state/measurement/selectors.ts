@@ -1,6 +1,6 @@
 import { createSelector } from "@reduxjs/toolkit";
 import { RootState } from "../configureStore";
-import { Measurement } from "./types";
+import { Measurement, UIError } from "./types";
 import { sortByDate, Order } from "../../utils/measurement";
 
 export const measurementsSelector = (state: RootState): Measurement[] =>
@@ -26,3 +26,7 @@ export const measurementSumSelector = createSelector(
 
 export const measurementsLoadingSelector = (state: RootState): boolean =>
   state.measurement.loading;
+
+export const measurementErrorSelector = (
+  state: RootState
+): UIError | undefined => state.measurement.error;

@@ -1,5 +1,6 @@
 import React, { FunctionComponent, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import MeasurementError from "../../components/MeasurementError";
 import MeasurementList from "../../components/MeasurementList";
 import {
   measurementsLoadingSelector,
@@ -19,6 +20,7 @@ const MeasurementListPage: FunctionComponent<void> = () => {
 
   return (
     <div>
+      <MeasurementError />
       {measurementsLoading && measurements.length === 0 ? (
         <div className="text-center my-4 text-xl">Loading...</div>
       ) : (

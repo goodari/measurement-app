@@ -4,6 +4,7 @@ import {
   getMeasurements,
   postMeasurement,
 } from "../../api/measurement";
+import { generateID } from "../../utils/id";
 import { MeasurementState } from "./types";
 
 export interface CounterState {
@@ -65,12 +66,20 @@ export const measurementSlice = createSlice({
         isAnyOf(
           createMeasurement.fulfilled,
           fetchMeasurements.fulfilled,
-          clearMeasurements.fulfilled,
+          clearMeasurements.fulfilled
+        ),
+        (state, action) => {
+          state.loading = false;
+        }
+      )
+      .addMatcher(
+        isAnyOf(
           createMeasurement.rejected,
           fetchMeasurements.rejected,
           clearMeasurements.rejected
         ),
         (state, action) => {
+          state.error = { id: generateID(), label: "Unknown error happened" }; // TODO: Handle error cases
           state.loading = false;
         }
       ),

@@ -1,5 +1,6 @@
 import React, { FunctionComponent, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import MeasurementError from "../../components/MeasurementError";
 import {
   latestMeasurementSelector,
   measurementsLoadingSelector,
@@ -37,31 +38,35 @@ const MeasurePage: FunctionComponent<void> = () => {
   }, [dispatch]);
 
   return (
-    <div className="flex flex-col items-center">
-      <div className="text-lg font-bold my-3">
-        {measurementsLoading ? (
-          "Loading..."
-        ) : (
-          <>{lastMeasurement?.value || 0} kg</>
-        )}
-      </div>
-      <div className="my-2">Sum: {measurementSum || 0} kg</div>
+    <div>
+      <MeasurementError />{" "}
+      {/* TODO: Don't use in different pages separately like this */}
+      <div className="flex flex-col items-center">
+        <div className="text-lg font-bold my-3">
+          {measurementsLoading ? (
+            "Loading..."
+          ) : (
+            <>{lastMeasurement?.value || 0} kg</>
+          )}
+        </div>
+        <div className="my-2">Sum: {measurementSum || 0} kg</div>
 
-      <div className="flex flex-row gap-3">
-        <button
-          className="button-primary"
-          onClick={() => measure()}
-          disabled={measurementsLoading}
-        >
-          Measure
-        </button>
-        <button
-          className="button-primary"
-          onClick={() => clear()}
-          disabled={measurementsLoading}
-        >
-          Reset
-        </button>
+        <div className="flex flex-row gap-3">
+          <button
+            className="button-primary"
+            onClick={() => measure()}
+            disabled={measurementsLoading}
+          >
+            Measure
+          </button>
+          <button
+            className="button-primary"
+            onClick={() => clear()}
+            disabled={measurementsLoading}
+          >
+            Reset
+          </button>
+        </div>
       </div>
     </div>
   );
