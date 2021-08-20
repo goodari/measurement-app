@@ -18,12 +18,23 @@ const initialState: MeasurementState = {
 
 const createMeasurement = createAsyncThunk(
   "measurements/create",
-  async (value: number) => {
-    const response = await postMeasurement(value);
+  async (value: number, { rejectWithValue }) => {
+    try {
+      const response = await postMeasurement(value);
+      return response.data;
+    } catch (err) {
+      if (!err.response) {
+        throw err;
+      }
 
-    return response.data;
+      return rejectWithValue(err.response.data);
+    }
   }
 );
+
+type WithErrorResponse = {
+  error: string;
+};
 
 const fetchMeasurements = createAsyncThunk("measurements/fetch", async () => {
   const response = await getMeasurements();
@@ -79,7 +90,10 @@ export const measurementSlice = createSlice({
           clearMeasurements.rejected
         ),
         (state, action) => {
-          state.error = { id: generateID(), label: "Unknown error happened" }; // TODO: Handle error cases
+          const message = action?.payload
+            ? (action?.payload as WithErrorResponse)?.error
+            : "Unknown error happened";
+          state.error = { id: generateID(), message }; // TODO: Handle error cases
           state.loading = false;
         }
       ),

@@ -1,4 +1,3 @@
-import { ReactNode } from "react";
 import { RouteComponentProps } from "react-router-dom";
 import MeasurementListPage from "../pages/MeasurementListPage";
 import MeasurePage from "../pages/MeasurePage";

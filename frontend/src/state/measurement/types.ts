@@ -11,5 +11,5 @@ export interface MeasurementState {
 
 export interface UIError {
   id: string;
-  label: string;
+  message: string;
 }

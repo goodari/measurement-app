@@ -8,7 +8,7 @@ type PropType = {
 const ErrorMessage: FunctionComponent<PropType> = ({ error }) => {
   return (
     <div className="w-full text-center bg-red-700 text-white">
-      {error.label}
+      {error.message}
     </div>
   );
 };
