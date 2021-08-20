@@ -29,11 +29,15 @@ export async function getAllMeasurements(req: Request, res: Response) {
  */
 export async function addOneMeasurement(req: Request, res: Response) {
   const { value } = req.body;
-  if (!value) {
+  if (!value || isNaN(value)) {
     return res.status(BAD_REQUEST).json({
       error: paramMissingError,
     });
   }
-  await measurementDao.add(new Measurement(value));
-  return res.status(CREATED).end();
+
+  const numberValue = +value;
+
+  const measurement = new Measurement(numberValue);
+  await measurementDao.add(measurement);
+  return res.status(CREATED).json(measurement);
 }
