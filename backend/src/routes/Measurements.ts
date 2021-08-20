@@ -41,3 +41,15 @@ export async function addOneMeasurement(req: Request, res: Response) {
   await measurementDao.add(measurement);
   return res.status(CREATED).json(measurement);
 }
+
+/**
+ * Remove all measurements.
+ *
+ * @param req
+ * @param res
+ * @returns
+ */
+export async function deleteMeasurements(req: Request, res: Response) {
+  await measurementDao.clear();
+  return res.status(OK).json({ measurements: [] });
+}

@@ -15,6 +15,11 @@ class MeasurementDao implements IMeasurementDao {
     // TODO
     return Promise.resolve(undefined);
   }
+
+  public async clear(): Promise<void> {
+    // TODO
+    return Promise.resolve(undefined);
+  }
 }
 
 export default MeasurementDao;

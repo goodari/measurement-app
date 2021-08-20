@@ -1,10 +1,15 @@
 import { Router } from "express";
-import { getAllMeasurements, addOneMeasurement } from "./Measurements";
+import {
+  getAllMeasurements,
+  addOneMeasurement,
+  deleteMeasurements,
+} from "./Measurements";
 
 // Measurement-route
 const measurementRouter = Router();
 measurementRouter.get("/", getAllMeasurements);
 measurementRouter.post("/", addOneMeasurement);
+measurementRouter.delete("/", deleteMeasurements);
 
 // Export the base-router
 const baseRouter = Router();

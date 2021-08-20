@@ -116,4 +116,21 @@ describe("Measurement Routes", () => {
       });
     });
   });
+
+  describe(`"DELETE:${addMeasurementsPath}"`, () => {
+    it(`should return a status code of "${OK}" and empty array of measurements if the request was successful.`, (done) => {
+      // Setup Spy
+      spyOn(MeasurementDao.prototype, "clear").and.returnValue(
+        Promise.resolve()
+      );
+      // Call API
+      agent.delete(addMeasurementsPath).end((err: Error, res: IResponse) => {
+        pErr(err);
+        expect(res.status).toBe(OK);
+        expect(res.body.error).toBeUndefined();
+        expect(res.body.measurements.length).toBe(0);
+        done();
+      });
+    });
+  });
 });

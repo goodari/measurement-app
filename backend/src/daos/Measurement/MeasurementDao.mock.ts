@@ -15,6 +15,12 @@ class MeasurementDao extends MockDaoMock implements IMeasurementDao {
     db.measurements.push(measurement);
     await super.saveDb(db);
   }
+
+  public async clear(): Promise<void> {
+    const db = await super.openDb();
+    db.measurements = [];
+    await super.saveDb(db);
+  }
 }
 
 export default MeasurementDao;
