@@ -15,7 +15,7 @@ export default function Routes() {
         <nav>
           <ul>
             {routes.map((route) => (
-              <li>
+              <li className="text-lg">
                 <Link to={route.path}>{route.label}</Link>
               </li>
             ))}
