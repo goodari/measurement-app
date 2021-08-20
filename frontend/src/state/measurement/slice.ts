@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { postMeasurement } from "../../api/measurement";
+import { getMeasurements, postMeasurement } from "../../api/measurement";
 import { MeasurementState } from "./types";
 
 export interface CounterState {
@@ -19,16 +19,26 @@ const createMeasurement = createAsyncThunk(
   }
 );
 
+const fetchMeasurements = createAsyncThunk("measurements/fetch", async () => {
+  const response = await getMeasurements();
+
+  return response.data;
+});
+
 export const measurementSlice = createSlice({
   name: "measurement",
   initialState,
   reducers: {},
   extraReducers: (builder) =>
-    builder.addCase(createMeasurement.fulfilled, (state, action) => {
-      state.measurements.push(action.payload);
-    }),
+    builder
+      .addCase(createMeasurement.fulfilled, (state, action) => {
+        state.measurements.push(action.payload);
+      })
+      .addCase(fetchMeasurements.fulfilled, (state, action) => {
+        state.measurements = action.payload.measurements;
+      }),
 });
 
-export { createMeasurement };
+export { createMeasurement, fetchMeasurements };
 
 export default measurementSlice.reducer;

@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import { RouteComponentProps } from "react-router-dom";
+import MeasurementListPage from "../pages/MeasurementListPage";
 import MeasurePage from "../pages/MeasurePage";
 
 interface Route {
@@ -15,5 +16,10 @@ export const routes: Route[] = [
     label: "Measure",
     path: "/measure",
     component: MeasurePage,
+  },
+  {
+    label: "Measurements",
+    path: "/list",
+    component: MeasurementListPage,
   },
 ];
