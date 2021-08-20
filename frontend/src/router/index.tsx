@@ -16,7 +16,7 @@ export default function Routes() {
         <nav>
           <ul className="flex gap-6 justify-center mx-auto my-2">
             {routes.map((route) => (
-              <li className="text-lg">
+              <li className="text-lg" key={route.label}>
                 <NavLink
                   to={route.path}
                   className="text-blue-500 hover:text-blue-800"
