@@ -34,8 +34,10 @@ const MeasurePage: FunctionComponent<void> = () => {
   };
 
   useEffect(() => {
-    dispatch(fetchMeasurements());
-  }, [dispatch]);
+    if (!lastMeasurement) {
+      dispatch(fetchMeasurements());
+    }
+  }, [dispatch, lastMeasurement]);
 
   return (
     <div>
