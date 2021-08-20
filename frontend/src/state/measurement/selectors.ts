@@ -23,3 +23,6 @@ export const measurementSumSelector = createSelector(
     );
   }
 );
+
+export const measurementsLoadingSelector = (state: RootState): boolean =>
+  state.measurement.loading;

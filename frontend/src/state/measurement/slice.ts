@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, isAnyOf } from "@reduxjs/toolkit";
 import {
   deleteMeasurements,
   getMeasurements,
@@ -12,6 +12,7 @@ export interface CounterState {
 
 const initialState: MeasurementState = {
   measurements: [],
+  loading: false,
 };
 
 const createMeasurement = createAsyncThunk(
@@ -49,7 +50,30 @@ export const measurementSlice = createSlice({
       })
       .addCase(clearMeasurements.fulfilled, (state, action) => {
         state.measurements = action.payload.measurements;
-      }),
+      })
+      .addMatcher(
+        isAnyOf(
+          createMeasurement.pending,
+          fetchMeasurements.pending,
+          clearMeasurements.pending
+        ),
+        (state, action) => {
+          state.loading = true;
+        }
+      )
+      .addMatcher(
+        isAnyOf(
+          createMeasurement.fulfilled,
+          fetchMeasurements.fulfilled,
+          clearMeasurements.fulfilled,
+          createMeasurement.rejected,
+          fetchMeasurements.rejected,
+          clearMeasurements.rejected
+        ),
+        (state, action) => {
+          state.loading = false;
+        }
+      ),
 });
 
 export { createMeasurement, fetchMeasurements, clearMeasurements };

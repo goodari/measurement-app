@@ -5,4 +5,5 @@ export interface Measurement {
 
 export interface MeasurementState {
   measurements: Measurement[];
+  loading: boolean;
 }

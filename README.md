@@ -13,6 +13,11 @@ would be recommended.
 No CI/CD. For this app there was no time to setup CI pipelines to run tests automatically, and
 obviously as the app has not been deployed anywhere there is no CD either.
 
+For demo purposes the measurement is thought as an asyncronous action, so response from back end
+after the measurement is required before front end state is updated. That might make the app look
+like it is behaving weirdly, as creating a measurement puts the front end in "loading" state for a
+moment.
+
 ## Development
 
 ### Front end

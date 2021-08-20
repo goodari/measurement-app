@@ -2,6 +2,7 @@ import React, { FunctionComponent, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   latestMeasurementSelector,
+  measurementsLoadingSelector,
   measurementSumSelector,
 } from "../../state/measurement/selectors";
 import {
@@ -15,6 +16,7 @@ const MeasurePage: FunctionComponent<void> = () => {
   const dispatch = useDispatch();
   const lastMeasurement = useSelector(latestMeasurementSelector);
   const measurementSum = useSelector(measurementSumSelector);
+  const measurementsLoading = useSelector(measurementsLoadingSelector);
 
   const measurementService = new MeasurementService();
 
@@ -37,15 +39,27 @@ const MeasurePage: FunctionComponent<void> = () => {
   return (
     <div className="flex flex-col items-center">
       <div className="text-lg font-bold my-3">
-        {lastMeasurement?.value || 0} kg
+        {measurementsLoading ? (
+          "Loading..."
+        ) : (
+          <>{lastMeasurement?.value || 0} kg</>
+        )}
       </div>
       <div className="my-2">Sum: {measurementSum || 0} kg</div>
 
       <div className="flex flex-row gap-3">
-        <button className="button-primary" onClick={() => measure()}>
+        <button
+          className="button-primary"
+          onClick={() => measure()}
+          disabled={measurementsLoading}
+        >
           Measure
         </button>
-        <button className="button-primary" onClick={() => clear()}>
+        <button
+          className="button-primary"
+          onClick={() => clear()}
+          disabled={measurementsLoading}
+        >
           Reset
         </button>
       </div>
