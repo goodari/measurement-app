@@ -1,15 +1,20 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { latestMeasurementSelector } from "../../state/measurement/selectors";
+import {
+  latestMeasurementSelector,
+  measurementSumSelector,
+} from "../../state/measurement/selectors";
 import {
   clearMeasurements,
   createMeasurement,
+  fetchMeasurements,
 } from "../../state/measurement/slice";
 import { MeasurementService } from "../../utils/MeasurementService";
 
 const MeasurePage: FunctionComponent<void> = () => {
   const dispatch = useDispatch();
   const lastMeasurement = useSelector(latestMeasurementSelector);
+  const measurementSum = useSelector(measurementSumSelector);
 
   const measurementService = new MeasurementService();
 
@@ -25,9 +30,16 @@ const MeasurePage: FunctionComponent<void> = () => {
     dispatch(clearMeasurements());
   };
 
+  useEffect(() => {
+    dispatch(fetchMeasurements());
+  }, [dispatch]);
+
   return (
     <div className="flex flex-col items-center">
-      <div>{lastMeasurement?.value || 0}</div>
+      <div className="text-lg font-bold my-3">
+        {lastMeasurement?.value || 0} kg
+      </div>
+      <div className="my-2">Sum: {measurementSum || 0} kg</div>
 
       <div className="flex flex-row gap-3">
         <button className="button-primary" onClick={() => measure()}>

@@ -14,3 +14,13 @@ export const latestMeasurementSelector = createSelector(
     return sorted[0];
   }
 );
+
+export const measurementSumSelector = createSelector(
+  measurementsSelector,
+  (measurements) => {
+    return measurements.reduce(
+      (sum, measurement) => (sum += measurement.value),
+      0
+    );
+  }
+);
