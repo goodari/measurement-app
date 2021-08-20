@@ -1,14 +1,13 @@
-import { Response } from 'supertest';
-import { IUser } from '@entities/User';
-
+import { Response } from "supertest";
+import { IMeasurement } from "@entities/Measurement";
 
 export interface IResponse extends Response {
-    body: {
-        users: IUser[];
-        error: string;
-    };
+  body: {
+    measurements: IMeasurement[];
+    error: string;
+  };
 }
 
 export interface IReqBody {
-    user?: IUser;
+  value?: number;
 }

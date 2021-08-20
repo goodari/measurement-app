@@ -1,16 +1,12 @@
-import { Router } from 'express';
-import { getAllUsers, addOneUser, updateOneUser, deleteOneUser } from './Users';
+import { Router } from "express";
+import { getAllMeasurements, addOneMeasurement } from "./Measurements";
 
-
-// User-route
-const userRouter = Router();
-userRouter.get('/all', getAllUsers);
-userRouter.post('/add', addOneUser);
-userRouter.put('/update', updateOneUser);
-userRouter.delete('/delete/:id', deleteOneUser);
-
+// Measurement-route
+const measurementRouter = Router();
+measurementRouter.get("/", getAllMeasurements);
+measurementRouter.post("/", addOneMeasurement);
 
 // Export the base-router
 const baseRouter = Router();
-baseRouter.use('/users', userRouter);
+baseRouter.use("/measurements", measurementRouter);
 export default baseRouter;
