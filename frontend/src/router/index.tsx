@@ -23,7 +23,11 @@ export default function Routes() {
         </nav>
         <Switch>
           {routes.map((route) => (
-            <Route path={route.path} component={route.component}></Route>
+            <Route
+              key={route.path}
+              path={route.path}
+              component={route.component}
+            ></Route>
           ))}
           <Route exact path="/">
             <Redirect to={routes[0].path} />

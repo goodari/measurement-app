@@ -1,5 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getMeasurements, postMeasurement } from "../../api/measurement";
+import {
+  deleteMeasurements,
+  getMeasurements,
+  postMeasurement,
+} from "../../api/measurement";
 import { MeasurementState } from "./types";
 
 export interface CounterState {
@@ -25,6 +29,12 @@ const fetchMeasurements = createAsyncThunk("measurements/fetch", async () => {
   return response.data;
 });
 
+const clearMeasurements = createAsyncThunk("measurements/delete", async () => {
+  const response = await deleteMeasurements();
+
+  return response.data;
+});
+
 export const measurementSlice = createSlice({
   name: "measurement",
   initialState,
@@ -36,9 +46,12 @@ export const measurementSlice = createSlice({
       })
       .addCase(fetchMeasurements.fulfilled, (state, action) => {
         state.measurements = action.payload.measurements;
+      })
+      .addCase(clearMeasurements.fulfilled, (state, action) => {
+        state.measurements = action.payload.measurements;
       }),
 });
 
-export { createMeasurement, fetchMeasurements };
+export { createMeasurement, fetchMeasurements, clearMeasurements };
 
 export default measurementSlice.reducer;
